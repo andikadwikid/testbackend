@@ -22,13 +22,13 @@ exports.postAbsen = async (req, res) => {
     where: {
       employeeId: employeeId,
       checkin: {
-        [Op.gte]: today,
+        [Op.lte]: today,
       },
     },
   });
 
   //jika sudah absen kirim pesan error
-  !checkAbsensi && res.status(400).send({ msg: "employee sudah absen" });
+  checkAbsensi && res.status(400).send({ msg: "employee sudah absen" });
 
   const absensi = await Absensi.create({
     checkin: checkin,
