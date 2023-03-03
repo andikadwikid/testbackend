@@ -16,6 +16,9 @@ exports.postAbsen = async (req, res) => {
   let seconds = String(today.getSeconds());
 
   today = `${yyyy}-${mm}-${dd} ${hours}:${minutes}:${seconds}`;
+  
+  //cek apakah employee ada atau tidak
+  !employeeId && res.status(400).send({ msg: "employee tidak ditemukan" });
 
   //cek apakah employee sudah absen hari ini atau belum
   const checkAbsensi = await Absensi.findOne({
@@ -35,9 +38,6 @@ exports.postAbsen = async (req, res) => {
     checkout: checkout,
     employeeId: employeeId,
   });
-
-  //cek apakah employee ada atau tidak
-  !employeeId && res.status(400).send({ msg: "employee tidak ditemukan" });
 
   res.status(201).send({ data: absensi });
 };
