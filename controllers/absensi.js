@@ -16,6 +16,7 @@ exports.postAbsen = async (req, res) => {
     let minutes = String(today.getMinutes());
     let seconds = String(today.getSeconds());
 
+<<<<<<< HEAD
     today = `${yyyy}-${mm}-${dd} ${hours}:${minutes}:${seconds}`;
 
     !employeeId && res.status(400).send({ msg: "employee tidak ditemukan" });
@@ -23,6 +24,19 @@ exports.postAbsen = async (req, res) => {
     const checkAbsensi = await Employee.findOne({
       where: {
         id: employeeId,
+=======
+  today = `${yyyy}-${mm}-${dd} ${hours}:${minutes}:${seconds}`;
+  
+  //cek apakah employee ada atau tidak
+  !employeeId && res.status(400).send({ msg: "employee tidak ditemukan" });
+
+  //cek apakah employee sudah absen hari ini atau belum
+  const checkAbsensi = await Absensi.findOne({
+    where: {
+      employeeId: employeeId,
+      checkin: {
+        [Op.lte]: today,
+>>>>>>> af0c8feb5da3741cdf897f4d129dc07e4a4370fc
       },
       include: [
         {
@@ -36,8 +50,13 @@ exports.postAbsen = async (req, res) => {
       ],
     });
 
+<<<<<<< HEAD
     //jika sudah absen kirim pesan error
     checkAbsensi && res.status(400).send({ msg: "employee sudah absen" });
+=======
+  //jika sudah absen kirim pesan error
+  checkAbsensi && res.status(400).send({ msg: "employee sudah absen" });
+>>>>>>> af0c8feb5da3741cdf897f4d129dc07e4a4370fc
 
     const absensi = await Absensi.create({
       checkin: today,
@@ -45,6 +64,7 @@ exports.postAbsen = async (req, res) => {
       employeeId: employeeId,
     });
 
+<<<<<<< HEAD
     res.status(201).send({ data: absensi });
   } catch (error) {
     res.status(500).send({ msg: "server error" });
@@ -59,6 +79,16 @@ exports.getAbsen = async (req, res) => {
   } catch (error) {
     res.status(500).send({ msg: "server error" });
   }
+=======
+  res.status(201).send({ data: absensi });
+};
+
+exports.getAbsen = async (req, res) => {
+
+  const absensi = await Absensi.findAll();
+
+  res.status(200).send({ data: absensi });
+>>>>>>> af0c8feb5da3741cdf897f4d129dc07e4a4370fc
 };
 
 exports.getAbsenDivisi = async (req, res) => {
