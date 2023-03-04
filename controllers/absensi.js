@@ -47,7 +47,7 @@ exports.postAbsen = async (req, res) => {
 
     res.status(201).send({ data: absensi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -57,7 +57,7 @@ exports.getAbsen = async (req, res) => {
 
     res.status(200).send({ data: absensi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -82,7 +82,7 @@ exports.getAbsenDivisi = async (req, res) => {
 
     res.status(200).send({ data: absensi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -96,6 +96,6 @@ exports.getAbsenId = async (req, res) => {
 
     res.status(200).send({ data: absensi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };

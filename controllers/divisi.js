@@ -8,7 +8,7 @@ exports.postDivisi = async (req, res) => {
 
     res.status(201).send({ data: divisi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -18,7 +18,7 @@ exports.getDivisi = async (req, res) => {
 
     res.status(200).send({ data: divisi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -32,7 +32,7 @@ exports.getDivisiById = async (req, res) => {
 
     res.status(200).send({ data: divisi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -51,7 +51,7 @@ exports.updateDivisi = async (req, res) => {
 
     res.status(200).send({ data: divisi });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -67,6 +67,6 @@ exports.deleteDivisi = async (req, res) => {
 
     res.status(200).send({ msg: "divisi berhasil dihapus" });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };

@@ -18,7 +18,7 @@ exports.postEmployee = async (req, res) => {
 
     res.status(201).send({ data: employee });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -28,7 +28,7 @@ exports.getEmployee = async (req, res) => {
 
     res.status(200).send({ data: employee });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -42,7 +42,7 @@ exports.getEmployeeById = async (req, res) => {
 
     res.status(200).send({ data: employee });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -62,7 +62,7 @@ exports.updateEmployee = async (req, res) => {
 
     res.status(200).send({ data: employee });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };
 
@@ -78,6 +78,6 @@ exports.deleteEmployee = async (req, res) => {
 
     res.status(200).send({ msg: "employee berhasil dihapus" });
   } catch (error) {
-    res.status(500).send({ msg: "server error" });
+    console.log(error);
   }
 };

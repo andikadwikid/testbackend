@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const sequelize = require("./db");
 
 const employeeRouter = require("./routes/employee");
 const divisiRouter = require("./routes/divisi");
@@ -10,8 +9,6 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-sequelize();
 
 app.use(employeeRouter);
 app.use(divisiRouter);
