@@ -7,7 +7,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {}
+    static associate(models) {
+      Employee.belongsTo(models.Divisi);
+      Employee.hasMany(
+        models.Absensi,
+        { foreignKey: "employeeId" },
+        { onDelete: "cascade" },
+        { onUpdate: "cascade" }
+      );
+    }
   }
   Employee.init(
     {

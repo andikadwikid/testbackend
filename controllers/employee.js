@@ -2,62 +2,82 @@ const Employee = require("../models").Employee;
 const Divisi = require("../models").Divisi;
 
 exports.postEmployee = async (req, res) => {
-  const { name, divisiId } = req.body;
+  try {
+    const { name, divisiId } = req.body;
 
-  const employee = await Employee.create({
-    name,
-    divisiId,
-  });
+    const employee = await Employee.create({
+      name,
+      divisiId,
+    });
 
-  !divisiId && res.status(400).send({ msg: "disivi harus diisi" });
+    !divisiId && res.status(400).send({ msg: "disivi harus diisi" });
 
-  const divisi = await Divisi.findByPk(divisiId);
+    const divisi = await Divisi.findByPk(divisiId);
 
-  !divisi && res.status(400).send({ msg: "divisi tidak ditemukan" });
+    !divisi && res.status(400).send({ msg: "divisi tidak ditemukan" });
 
-  res.status(201).send({ data: employee });
+    res.status(201).send({ data: employee });
+  } catch (error) {
+    res.status(500).send({ msg: "server error" });
+  }
 };
 
 exports.getEmployee = async (req, res) => {
-  const employee = await Employee.findAll();
+  try {
+    const employee = await Employee.findAll();
 
-  res.status(200).send({ data: employee });
+    res.status(200).send({ data: employee });
+  } catch (error) {
+    res.status(500).send({ msg: "server error" });
+  }
 };
 
 exports.getEmployeeById = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const employee = await Employee.findByPk(id);
+    const employee = await Employee.findByPk(id);
 
-  !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
+    !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
 
-  res.status(200).send({ data: employee });
+    res.status(200).send({ data: employee });
+  } catch (error) {
+    res.status(500).send({ msg: "server error" });
+  }
 };
 
 exports.updateEmployee = async (req, res) => {
-  const { id } = req.params;
-  const { name, divisiId } = req.body;
+  try {
+    const { id } = req.params;
+    const { name, divisiId } = req.body;
 
-  const employee = await Employee.findByPk(id);
+    const employee = await Employee.findByPk(id);
 
-  !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
+    !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
 
-  employee.name = name;
-  employee.divisiId = divisiId;
+    employee.name = name;
+    employee.divisiId = divisiId;
 
-  await employee.save();
+    await employee.save();
 
-  res.status(200).send({ data: employee });
+    res.status(200).send({ data: employee });
+  } catch (error) {
+    res.status(500).send({ msg: "server error" });
+  }
 };
 
 exports.deleteEmployee = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const employee = await Employee.findByPk(id);
+    const employee = await Employee.findByPk(id);
 
-  !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
+    !employee && res.status(400).send({ msg: "employee tidak ditemukan" });
 
-  await employee.destroy();
+    await employee.destroy();
 
-  res.status(200).send({ msg: "employee berhasil dihapus" });
+    res.status(200).send({ msg: "employee berhasil dihapus" });
+  } catch (error) {
+    res.status(500).send({ msg: "server error" });
+  }
 };
