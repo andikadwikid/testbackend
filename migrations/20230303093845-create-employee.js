@@ -21,7 +21,6 @@ module.exports = {
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
-        ep,
       },
       createdAt: {
         allowNull: false,
